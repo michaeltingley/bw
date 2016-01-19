@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.conf.urls import include, url
 from django.contrib import admin
+from django.contrib.staticfiles import views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^chat/', include('chat.urls')),
     url(r'^polls/', include('polls.urls')),
-    # url(r'^accounts/', include('django.contrib.auth.urls')),
+    # Note: If this were for a real deployment, we would want a separate static
+    # resources web server to serve these static assets, instead of Django
+    url(r'^static/(?P<path>.*)$', views.serve),
 ]
