@@ -1,0 +1,21 @@
+{% load staticfiles %}
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+<link rel="stylesheet" type="text/css" href="{% static 'css/signin.css' %}">
+
+<div class="container">
+  <form class="form-signin" method="post" action="{% url 'chat:login' %}">
+    {% csrf_token %}
+    <h2 class="form-signin-heading">Please sign in</h2>
+    {% if error %}
+      <p>{{ error }}</p>
+    {% endif %}
+    <label for="email" class="sr-only">Email:</label>
+    <input type="email" name="email" class="form-control" placeholder="Email address" required="" autofocus=""></input>
+    <label for="password" class="sr-only">Password:</label>
+    <input type="password" name="password" class="form-control" placeholder="Password" required=""></input>
+    <input type="submit" name="login" value="Log in" class="btn btn-lg btn-primary btn-block"></input>
+    <input type="submit" name="sign_up" value="Sign up" class="btn btn-lg btn-block"></input>
+    <input type="hidden" name="next" value="{{ next }}" />
+  </form>
+</div>
