@@ -125,3 +125,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+
+# Pusher settings
+
+PUSHER_APP_ID = u'165329'
+PUSHER_KEY = u'f4e32bbd2ddcdaa5e41f'
+PUSHER_SECRET = u'6f6744195b7b081c20c0'
