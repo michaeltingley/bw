@@ -31,26 +31,23 @@ function conversationToHtml(conversation) {
     click: createSetActiveConversationFunction(participantEmail),
     class: currentConversationEmail == participantEmail ? 'conversation-selected' : '',
     html: $('<div />', {
-        class: 'conversation-entry',
-        html: [
-            $('<span />', {
-                class: 'conversation-email',
-                html: participantEmail,
-            }),
-            $('<span />', {
-                class: 'conversation-timestamp',
-                html: conversation.last_message.timestamp,
-            }),
-            $('<br />'),
-            $('<span />', {
-                class: 'conversation-snippet',
-                html:
-                    (conversation.last_message.email == USER_EMAIL
-                        ? USER_META_REFERENCE + ": "
-                        : "")
-                    + conversation.last_message.body,
-            }),
-        ],
+      class: 'conversation-entry',
+      html: [
+        $('<span />', {
+          class: 'conversation-email',
+          html: participantEmail,
+        }),
+        $('<span />', {
+          class: 'conversation-timestamp',
+          html: conversation.last_message.timestamp,
+        }),
+        $('<br />'),
+        $('<span />', {
+          class: 'conversation-snippet',
+          html: (conversation.last_message.email == USER_EMAIL ? USER_META_REFERENCE + ": " : "")
+              + conversation.last_message.body,
+        }),
+      ],
     }),
   });
 }
@@ -63,17 +60,17 @@ function messageToHtml(message) {
   return $('<li />', {
     class: (isUserMe ? "message-outgoing" : "message-incoming"),
     html: [
-      $('<span />', {
-        class: 'bubble panel '
-          + (isUserMe ? "bubble-outgoing" : "bubble-incoming"),
-        html: message.body
-      }),
-      $('<br>'),
-      $('<span />', {
-        class: 'bubble-details',
-        html: (isUserMe ? USER_META_REFERENCE : message.email)
-          + " &#8226; " + message.timestamp
-      })
+        $('<span />', {
+          class: 'bubble panel '
+              + (isUserMe ? "bubble-outgoing" : "bubble-incoming"),
+          html: message.body
+        }),
+        $('<br>'),
+        $('<span />', {
+          class: 'bubble-details',
+          html: (isUserMe ? USER_META_REFERENCE : message.email)
+              + " &#8226; " + message.timestamp
+        })
     ]
   });
 }
@@ -106,17 +103,17 @@ function setActiveConversation(email) {
       $('#post_message')
           .unbind()
           .submit(function(event) {
-              event.preventDefault();
-              $.ajax({
-                  type: 'POST',
-                  url: '/chat/post_message/',
-                  data: {
-                    'csrfmiddlewaretoken': CSRF_TOKEN,
-                    'email': email,
-                    'message_text': $('#message_text').val(),
-                  },
-              });
-              $('#message_text').val('');
+            event.preventDefault();
+            $.ajax({
+              type: 'POST',
+              url: '/chat/post_message/',
+              data: {
+                'csrfmiddlewaretoken': CSRF_TOKEN,
+                'email': email,
+                'message_text': $('#message_text').val(),
+              },
+            });
+            $('#message_text').val('');
           });
       window.scrollTo(0,document.body.scrollHeight);
     }
